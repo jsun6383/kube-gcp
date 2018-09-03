@@ -1,0 +1,58 @@
+# Copyright 2016 Google Inc. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+info:
+  title: Container VM for cfssl
+  author: John Sun
+  description: Creates a Container VM with the provided Container manifest.
+
+imports:
+- path: helpers.py
+- path: container_vm.py
+- path: instance.py
+- path: firewall.py
+
+required:
+- zone
+- instanceProject
+- instanceImage
+- instanceType
+- containerManifest
+- diskSize
+
+properties:
+  zone:
+    description: Zone in which this VM will run
+    type: string
+  instanceProject:
+    description: Project space of instance family
+    type: string
+  instanceImage:
+    description: Name of image used
+    type: string
+  instanceType:
+    description: Type of GCE instance used
+    type: string
+  containerManifest:
+    description: String containing the Container Manifest in YAML
+    type: string
+  diskSize:
+    description: Size of the volume on the instances
+    type: string
+
+outputs:
+  properties:
+  - address:
+    description: IP address of cfssl service
+    type: string

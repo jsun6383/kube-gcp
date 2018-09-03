@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cfssl
+spec:
+  containers:
+    - name: cfssl
+      image: gcr.io/kube-209200/cfssl:latest
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 8888
+          hostPort: 8888

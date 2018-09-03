@@ -1,0 +1,31 @@
+imports:
+- path: cfssl_container_manifest.yaml
+  name: cfssl_container_manifest
+- path: kube.py
+- path: cfssl.py
+- path: scripts/controller_start_up.sh
+  name: controller_start_up
+
+resources:
+- name: cluster
+  type: kube.py
+  properties:
+    zone: australia-southeast1-a
+    instanceProject: ubuntu-os-cloud
+    instanceImage: family/ubuntu-1804-lts
+    instanceType: f1-micro
+    diskSize: "20"
+    controllerStartupScript: controller_start_up
+    cfsslIP: $(ref.cfssl.address)
+  metadata:
+    dependsOn:
+    - cfssl
+- name: cfssl
+  type: cfssl.py
+  properties:
+    zone: australia-southeast1-a
+    instanceProject: cos-cloud
+    instanceImage: family/cos-stable
+    instanceType: f1-micro
+    containerManifest: cfssl_container_manifest
+    diskSize: "10"
