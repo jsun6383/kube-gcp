@@ -13,8 +13,8 @@ def GenerateConfig(context):
 
     res = [
         instance.create_instance(),
-        fw.create_ingress_allow("allow-22","0.0.0.0/0","22"),
-        fw.create_ingress_allow("allow-8888","0.0.0.0/0","8888")
+        fw.create_ingress_allow("allow-22",["0.0.0.0/0"],"22"),
+        fw.create_ingress_allow("allow-8888",["0.0.0.0/0"],"8888")
     ]
 
     out = [

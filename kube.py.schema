@@ -25,6 +25,7 @@ imports:
 - path: vpc.py
 - path: firewall.py
 - path: address.py
+- path: nlb.py
 
 required:
 - zone
@@ -33,6 +34,10 @@ required:
 - instanceType
 - diskSize
 - controllerStartupScript
+- cfsslIP
+- kubeClusterCIDR
+- vpcCIDR
+- kubeServiceClusterCIDR
 
 properties:
   zone:
@@ -55,4 +60,13 @@ properties:
     type: string
   cfsslIP:
     description: IP of CFSSL server
+    type: string
+  kubeClusterCIDR:
+    description: CIDR for kubernetes cluster
+    type: string
+  vpcCIDR:
+    description: CIDR for vpc
+    type: string
+  kubeServiceClusterCIDR:
+    description: CIDR for kubernetes services
     type: string

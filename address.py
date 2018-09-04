@@ -9,7 +9,7 @@ class Address:
 
     def create_public_address(self):
 
-        region = self.context.properties['zone'][:-2]
+        region = self.context.properties['region']
 
         address = {
             "name": self.name,
@@ -21,6 +21,8 @@ class Address:
             "type": "compute.v1.address",
             "properties": address
         }
+
+        address_ref = "$(ref"
 
         return resource
 

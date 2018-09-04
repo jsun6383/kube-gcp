@@ -1,4 +1,4 @@
-stack_name := kube-cluster
+stack_name := kube
 config_file := kube-cluster.yaml
 
 preview:

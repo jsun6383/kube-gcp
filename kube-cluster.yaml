@@ -13,10 +13,13 @@ resources:
     zone: australia-southeast1-a
     instanceProject: ubuntu-os-cloud
     instanceImage: family/ubuntu-1804-lts
-    instanceType: f1-micro
+    instanceType: n1-standard-1
     diskSize: "20"
     controllerStartupScript: controller_start_up
     cfsslIP: $(ref.cfssl.address)
+    kubeClusterCIDR: "10.200.0.0/16"
+    vpcCIDR: "10.240.0.0/24"
+    kubeServiceClusterCIDR: "10.32.0.0/24"
   metadata:
     dependsOn:
     - cfssl

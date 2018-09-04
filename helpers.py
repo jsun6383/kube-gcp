@@ -7,6 +7,10 @@ def concat_names(names):
         newName = newName + "-" + name
     return newName
 
+def gen_name(context, name):
+    return concat_names([context.env['deployment'],
+        context.env['name'], name])
+
 def global_compute_url(project, collection, name):
     return ''.join([COMPUTE_URL_BASE, 'projects/', project,
                 '/global/', collection, '/', name])

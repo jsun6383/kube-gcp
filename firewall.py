@@ -10,21 +10,22 @@ class Firewall:
         return concat_names(
             [self.context.env['deployment'], self.context.env['name'], fw_name])
 
-    def create_ingress_allow(self, fw_name, sourceCidr, port):
+    def create_ingress_allow(self, fw_name, sourceCIDR, port):
         fw_name = self.get_fw_name(fw_name)
 
         fw = {
             "network": self.vpc,
             "name": fw_name,
-            "sourceRanges": [
-                sourceCidr
-            ],
+            "sourceRanges": sourceCIDR,
             "allowed": [
                 {
                     "IPProtocol": "tcp",
                     "ports": [
                         port
                     ]
+                },
+                {
+                    "IPProtocol": "icmp"
                 }
             ]
         }
@@ -37,15 +38,13 @@ class Firewall:
 
         return resource
 
-    def create_allow_all_internal(self, fw_name, sourceCidr):
+    def create_allow_all_internal(self, fw_name, sourceCIDR):
         fw_name = self.get_fw_name(fw_name)
 
         fw = {
             "network": self.vpc,
             "name": fw_name,
-            "sourceRanges": [
-                sourceCidr
-            ],
+            "sourceRanges": sourceCIDR,
             "allowed": [
                 {
                     "IPProtocol": "tcp"
