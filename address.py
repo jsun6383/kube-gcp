@@ -22,7 +22,5 @@ class Address:
             "properties": address
         }
 
-        address_ref = "$(ref"
-
         return resource
 

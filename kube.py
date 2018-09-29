@@ -2,7 +2,8 @@ from controller import Controller
 from firewall import Firewall
 from vpc import Vpc
 from address import Address
-# from netaddr import IPNetwork
+from worker import Worker
+# from netaddr import ]IPNetwork
 from nlb import Nlb
 
 def GenerateConfig(context):
@@ -46,6 +47,15 @@ def GenerateConfig(context):
         res.append(controller.create_controller(address, vpc.cidr))
 
     res.extend(nlb.create_nlb())
+
+    worker_mapping = [
+        ("worker0", "10.240.0.20", "10.200.0.0/24"),
+        ("worker1", "10.240.0.21", "10.200.1.0/24")
+    ]
+
+    for mapping in worker_mapping:
+        worker = Worker(context, vpc.vpc_ref, mapping[0], mapping[1], mapping[2])
+        res.append(worker.create_worker(address))
 
     # Resources to return.
     resources = {
